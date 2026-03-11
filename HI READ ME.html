@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial;
+    color:white;
+    overflow:hidden;
+}
+
+/* Message container */
+
+.container{
+    text-align:center;
+    background:rgba(0,0,0,0.55);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    animation:fadeIn 2s;
+    position:relative;
+    z-index:10;
+}
+
+h1{
+    color:#ff6b6b;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    background:#ff6b6b;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:20px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 15px #ff6b6b;
+}
+
+/* Floating hearts */
+
+.heart{
+    position:absolute;
+    bottom:-50px;
+    animation:float 6s linear infinite;
+}
+
+/* Sunflowers */
+
+.sunflower{
+    position:absolute;
+    bottom:-100px;
+    opacity:0.35;
+    animation:floatSunflower linear infinite;
+}
+
+/* Sparkles */
+
+.sparkle{
+    position:absolute;
+    color:white;
+    opacity:0.8;
+    animation:floatSparkle 5s linear infinite;
+}
+
+/* Animations */
+
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(-110vh);}
+}
+
+@keyframes floatSunflower{
+    0%{
+        transform:translateY(0) translateX(0) rotate(0deg);
+    }
+    50%{
+        transform:translateY(-50vh) translateX(40px) rotate(180deg);
+    }
+    100%{
+        transform:translateY(-120vh) translateX(-40px) rotate(360deg);
+    }
+}
+
+@keyframes floatSparkle{
+    from{transform:translateY(0);}
+    to{transform:translateY(-100vh);}
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Hey...</h1>
+<p id="text"></p>
+<button onclick="showMessage()">Click Me</button>
+</div>
+
+<script>
+
+let message = "Jhea, I just want to say I’m really sorry if my words hurt you. That was never my intention. I’ve been thinking about it, and it makes me feel bad knowing that something I said made you feel like I was looking down on you. I don’t ever want you to feel that way because that’s not how I see you at all. I want you to know that I actually respect you a lot. I’m really proud of you for not giving up on your dreams and for continuing to push forward even when things are hard. Not everyone has that kind of determination, and that’s something I truly admire about you. If my words made you feel bad or made you think that mababa ang tingin ko sa’yo, I’m really sorry. That’s not true at all. The last thing I wouldn't ever want is for you to feel small or think that I’m looking down on you. I would never want to hurt you or your feelings. And I also want to be honest about something. I really like you. I’m sorry if it ever seemed like I was just playing around or tripping about my feelings for you, but the truth is I’m not. My feelings for you are real. Maybe sometimes the way I say things or the way I act makes it look like I’m joking, but deep down I genuinely like you. That’s also why it hurts me knowing that I might have hurt you. I hope you can forgive me. I truly value you, and the last thing I don't want to be the reason you feel bad.";
+
+let i = 0;
+
+function showMessage(){
+
+    let speed = 40;
+
+    function typing(){
+
+        if(i < message.length){
+
+            document.getElementById("text").innerHTML += message.charAt(i);
+
+            i++;
+
+            setTimeout(typing,speed);
+
+        }else{
+
+            sunflowerRain();
+
+        }
+
+    }
+
+    typing();
+
+}
+
+/* HEARTS */
+
+function hearts(){
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML="❤️";
+
+    heart.style.left = Math.random()*100+"vw";
+
+    heart.style.fontSize = (Math.random()*20+10)+"px";
+
+    heart.style.animationDuration = (Math.random()*3+3)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove()},6000);
+
+}
+
+/* SUNFLOWERS */
+
+function sunflowers(){
+
+    const flower = document.createElement("div");
+
+    flower.classList.add("sunflower");
+
+    flower.innerHTML="🌻";
+
+    flower.style.left = Math.random()*100+"vw";
+
+    flower.style.fontSize = (Math.random()*80+50)+"px";
+
+    flower.style.animationDuration = (Math.random()*8+8)+"s";
+
+    document.body.appendChild(flower);
+
+    setTimeout(()=>{flower.remove()},18000);
+
+}
+
+/* SPARKLES */
+
+function sparkles(){
+
+    const sparkle = document.createElement("div");
+
+    sparkle.classList.add("sparkle");
+
+    sparkle.innerHTML="✨";
+
+    sparkle.style.left = Math.random()*100+"vw";
+
+    sparkle.style.fontSize = (Math.random()*10+10)+"px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(()=>{sparkle.remove()},5000);
+
+}
+
+/* SUNFLOWER RAIN */
+
+function sunflowerRain(){
+
+    setInterval(()=>{
+
+        const flower = document.createElement("div");
+
+        flower.innerHTML="🌻";
+
+        flower.style.position="absolute";
+
+        flower.style.top="-50px";
+
+        flower.style.left=Math.random()*100+"vw";
+
+        flower.style.fontSize="40px";
+
+        flower.style.animation="fall 4s linear";
+
+        document.body.appendChild(flower);
+
+        setTimeout(()=>{flower.remove()},4000);
+
+    },200);
+
+}
+
+/* spawn effects */
+
+setInterval(hearts,500);
+
+setInterval(sunflowers,700);
+
+setInterval(sparkles,900);
+
+</script>
+
+</body>
+</html>
